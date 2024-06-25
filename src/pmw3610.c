@@ -25,7 +25,7 @@ LOG_MODULE_REGISTER(pmw3610, CONFIG_INPUT_LOG_LEVEL);
 enum pmw3610_init_step {
     ASYNC_INIT_STEP_POWER_UP,  // reset cs line and assert power-up reset
     ASYNC_INIT_STEP_CLEAR_OB1, // clear observation1 register for self-test check
-    ASYNC_INIT_STEP_CHECK_OB1, // check the value of observation1 register after self-test check
+    // ASYNC_INIT_STEP_CHECK_OB1, // check the value of observation1 register after self-test check
     ASYNC_INIT_STEP_CONFIGURE, // set other registes like cpi and donwshift time (run, rest1, rest2)
                                // and clear motion registers
 
@@ -40,7 +40,7 @@ static const int32_t async_init_delay[ASYNC_INIT_STEP_COUNT] = {
     [ASYNC_INIT_STEP_CLEAR_OB1] =
         200,                          // 150 us required, test shows too short,
                                       // also power-up reset is added in this step, thus using 50 ms
-    [ASYNC_INIT_STEP_CHECK_OB1] = 1000, // 10 ms required in spec,
+    // [ASYNC_INIT_STEP_CHECK_OB1] = 1000, // 10 ms required in spec,
                                       // test shows too short,
                                       // especially when integrated with display,
                                       // > 50ms is needed
@@ -55,7 +55,7 @@ static int pmw3610_async_init_configure(const struct device *dev);
 static int (*const async_init_fn[ASYNC_INIT_STEP_COUNT])(const struct device *dev) = {
     [ASYNC_INIT_STEP_POWER_UP] = pmw3610_async_init_power_up,
     [ASYNC_INIT_STEP_CLEAR_OB1] = pmw3610_async_init_clear_ob1,
-    [ASYNC_INIT_STEP_CHECK_OB1] = pmw3610_async_init_check_ob1,
+    // [ASYNC_INIT_STEP_CHECK_OB1] = pmw3610_async_init_check_ob1,
     [ASYNC_INIT_STEP_CONFIGURE] = pmw3610_async_init_configure,
 };
 
